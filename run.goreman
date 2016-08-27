@@ -1,0 +1,7 @@
+#!/bin/bash
+echo "Starting parity.."
+/root/configure-parity.sh
+wget -O /root/chain.json http://$MASTER_IP:$CADDY_PORT/chain.json -q
+cd /etc/goreman 
+echo "starting foreman in bg.."
+goreman start
