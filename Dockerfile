@@ -65,7 +65,7 @@ RUN mkdir /etc/goreman
 COPY Procfile /etc/goreman
 COPY configure-parity.sh $HOME/configure-parity.sh
 RUN chmod +x $HOME/configure-parity.sh
-# RUN $HOME/configure-parity.sh
+RUN $HOME/configure-parity.sh
 
 
 #########################
@@ -79,7 +79,7 @@ RUN chmod +x /usr/local/bin/enode.sh
 ##########
 # volume #
 ##########
-# you can find the volume by using `docker inspect command`
+
 VOLUME /root
 
 # you need to specify -p 8545:8545 -p 30303:30303  in `docker run` to expose it to 0.0.0.0
@@ -87,8 +87,6 @@ EXPOSE 8545
 EXPOSE 30303
 # port for web server for static files with node id
 EXPOSE 8001
-# parity dapps ui 
-EXPOSE 8002
 
 COPY run.goreman /usr/local/bin
 CMD ["run.goreman"]
