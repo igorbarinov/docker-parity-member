@@ -3,7 +3,7 @@ echo "Starting parity.."
 wget -O /root/chain.json http://$MASTER_IP:$CADDY_PORT/chain.json -q
 HOME=/root
 address=0x$(parity account list | awk 'END{print}' | tr -cd '[:alnum:]._-')
-command="parity --chain $HOME/chain.json --unlock ${address} --password $HOME/.parity-pass --rpccorsdomain \"*\" --jsonrpc-hosts=all --jsonrpc-interface all --bootnodes $ENODE  >&1 1>>/var/log/parity.log 2>&1"
+command="parity -lsync=trace,txqueue=trace,own_tx=trace --chain $HOME/chain.json --unlock ${address} --password $HOME/.parity-pass --rpccorsdomain \"*\" --jsonrpc-hosts=all --jsonrpc-interface all --bootnodes $ENODE  >&1 1>>/var/log/parity.log 2>&1"
 echo parity:$command >> /etc/goreman/Procfile 
 
 cd /etc/goreman 

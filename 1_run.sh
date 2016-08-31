@@ -14,7 +14,7 @@ CADDY_PORT=8001
 ENODE="$(curl -q $MASTER_IP:$CADDY_PORT)$MASTER_IP:$MASTER_PORT"
 
 # we pass ip and caddy port of the master node to get chain.json of master node inside docker container
-sudo docker run --name parity-member1 -e ENODE=$ENODE -e MASTER_IP=$MASTER_IP -e CADDY_PORT=$CADDY_PORT -d igorbarinov/docker-parity-member
+sudo docker run --name parity-member1 -p 8546:8545 -e ENODE=$ENODE -e MASTER_IP=$MASTER_IP -e CADDY_PORT=$CADDY_PORT -d igorbarinov/docker-parity-member
 
 # bash to container, just in case you need to tail -f /var/log/parity
 sudo docker exec -it parity-member1 bash 

@@ -1,9 +1,9 @@
 ## How to build
-sudo docker build -t igorbarinov/docker-parity-member .
+`sudo docker build -t igorbarinov/docker-parity-member .`
 
 ## How to run
 Check out script:
-https://github.com/igorbarinov/docker-parity-member/blob/master/1_run.sh
+`https://github.com/igorbarinov/docker-parity-member/blob/master/1_run.sh`
 
 ## Ports
 * 30303  p2p networking

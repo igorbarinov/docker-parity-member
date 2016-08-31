@@ -23,11 +23,17 @@ RUN echo 'export LD_LIBRARY_PATH=/usr/local/lib' >> /etc/profile.d/solc.sh
 ##################
 # install parity #
 ##################
-ENV PARITY_DEB_URL=https://vanity-service.ethcore.io/github-data/latest-parity-deb
-ENV file=/tmp/parity.deb
-RUN curl -Lk $PARITY_DEB_URL > $file
-RUN sudo dpkg -i $file
-RUN rm $file
+#ENV PARITY_DEB_URL=https://vanity-service.ethcore.io/github-data/latest-parity-deb
+#ENV file=/tmp/parity.deb
+#RUN curl -Lk $PARITY_DEB_URL > $file
+#RUN sudo dpkg -i $file
+#RUN rm $file
+RUN curl -sSf https://static.rust-lang.org/rustup.sh | sh \
+ && cargo install --git https://github.com/ethcore/parity.git parity --branch master \
+ && strip /root/.cargo/bin/parity \
+ && cp -v /root/.cargo/bin/parity /usr/local/bin/ \
+ && /usr/local/lib/rustlib/uninstall.sh \
+ && rm -rf /root/.cargo/
 
 ##################
 # install golang #
